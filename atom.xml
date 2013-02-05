@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[My Octopress Blog]]></title>
+  <link href="http://ACrystalC.github.com/atom.xml" rel="self"/>
+  <link href="http://ACrystalC.github.com/"/>
+  <updated>2013-02-05T18:36:00-05:00</updated>
+  <id>http://ACrystalC.github.com/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[And so it begins]]></title>
+    <link href="http://ACrystalC.github.com/blog/2013/02/05/and-so-it-begins/"/>
+    <updated>2013-02-05T18:24:00-05:00</updated>
+    <id>http://ACrystalC.github.com/blog/2013/02/05/and-so-it-begins</id>
+    <content type="html"><![CDATA[<h1>What am I doing?</h1>
+]]></content>
+  </entry>
+  
+</feed>
