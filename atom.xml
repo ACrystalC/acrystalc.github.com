@@ -4,7 +4,7 @@
   <title><![CDATA[Operations Scientists Unite!]]></title>
   <link href="http://ACrystalC.github.com/atom.xml" rel="self"/>
   <link href="http://ACrystalC.github.com/"/>
-  <updated>2013-02-07T13:14:36-05:00</updated>
+  <updated>2013-02-12T09:47:13-05:00</updated>
   <id>http://ACrystalC.github.com/</id>
   <author>
     <name><![CDATA[Crystal Chang]]></name>
@@ -12,6 +12,19 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Coding and the Art of Self-Realization]]></title>
+    <link href="http://ACrystalC.github.com/blog/2013/02/12/coding-and-the-art-of-self-realization/"/>
+    <updated>2013-02-12T09:03:00-05:00</updated>
+    <id>http://ACrystalC.github.com/blog/2013/02/12/coding-and-the-art-of-self-realization</id>
+    <content type="html"><![CDATA[<p>Whenever you set off on the process of learning something new, you&#8217;re also in a great position to learn some pretty profound things about yourself. I&#8217;m sure those will come to me eventually as I&#8217;m learning to code, but so far the really big thing I&#8217;ve learned is that I seriously cannot function without a good chunk of sleep each night.</p>
+
+<p>I mean it. Learning to program requires so much concentration and this is especially true at the <a href="http://flatironschool.com/">Flatiron School</a>. Everyday we&#8217;re learning and working from 9 to at least 6 in the classroom and then we all go home and do some more. So not sleeping enough is a mistake I plan on only making once. Seriously, it was zombie bad the next day and with the speed we&#8217;re learning at, missing anything can set you back significantly. Plus why would I want to miss any of <a href="http://shitavisays.tumblr.com">Avi&#8217;s bon mots</a>? I don&#8217;t and you shouldn&#8217;t either. Sleep is key&#8230;and the value is learning stuff (Whoa, hash jokes already!).</p>
+
+<p>In a similar vein, I&#8217;ve discovered that it&#8217;s also incredibly important to prioritize. I could spend an endless amount of time doggedly pursuing the answer to a single, frustrating question, but sometimes I have to stop because of that aforementioned sleep thing. For those who can sleep very little and function at full-speed regardless, I salute you (but seriously, don&#8217;t you enjoy sleep? It&#8217;s like so awesome. As are beds.) For me, I&#8217;m just hoping to prevent burnout before this 12-week adventure is over.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[And so it begins]]></title>
