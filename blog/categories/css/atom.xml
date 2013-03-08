@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | The Science of Operations]]></title>
   <link href="http://ACrystalC.github.com/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://ACrystalC.github.com/"/>
-  <updated>2013-03-07T22:42:07-05:00</updated>
+  <updated>2013-03-07T23:05:00-05:00</updated>
   <id>http://ACrystalC.github.com/</id>
   <author>
     <name><![CDATA[Crystal Chang]]></name>
@@ -18,8 +18,9 @@
     <link href="http://ACrystalC.github.com/blog/2013/03/07/image-filters-using-css/"/>
     <updated>2013-03-07T21:16:00-05:00</updated>
     <id>http://ACrystalC.github.com/blog/2013/03/07/image-filters-using-css</id>
-    <content type="html"><![CDATA[<p>A quick post about some very cool CSS you can find online because I was too busy helping build <a href="http://janeslunch.com">Jane's Lunch</a> to write an in-depth post. Sorry! In any case, <a href="http://codepen.io/jacksaidwhat/pen/faJpv">CSS Totoro</a> welcomes you.
-<link rel="stylesheet" href="stylesheets/totoro.css" type="text/css" /></p>
+    <content type="html"><![CDATA[<p>A quick post about some very cool CSS you can find online because I was too busy helping build <a href="http://janeslunch.com">Jane's Lunch</a> to write an in-depth post. Sorry! In any case, <a href="http://codepen.io/jacksaidwhat/pen/faJpv">CSS Totoro</a> welcomes you.</p>
+
+<p><link rel="stylesheet" href="stylesheets/totoro.css" type="text/css" /></p>
 
 <div class="wrap">
 
@@ -75,13 +76,104 @@
 
 <p>CSS is awesome and I don't even mean it <a href="http://www.zazzle.com/css_is_awesome_coffee_mug-168716435071981928">ironically</a>. Sure there are flashier languages, but CSS seems like a lot of fun. You get to see immediate changes to whatever you're working on and you can make so many cool things with it!</p>
 
-<p>For instance, check out these <a href="http://one-div.com/">logos</a> made from only one and some CSS. Some highlights include this mug:</p>
+<p>For instance, check out these <a href="http://one-div.com/">logos</a> made from only one div tag and some CSS. One of my favorites is this mug:</p>
 
-<div class="mug"></div>
+<div class="mug_animate"></div>
 
 
-<div class="ghost"></div>
+<p></p>
 
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="p">.</span><span class="n">mug_animate</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">box</span><span class="o">-</span><span class="nl">shadow:</span> <span class="n">inset</span> <span class="mi">0</span> <span class="o">-</span><span class="mi">3</span><span class="n">em</span> <span class="mi">0</span> <span class="mi">0</span> <span class="err">#</span><span class="mi">2</span><span class="n">C2C2C</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">box</span><span class="o">-</span><span class="nl">shadow:</span> <span class="n">inset</span> <span class="mi">0</span> <span class="o">-</span><span class="mi">3</span><span class="n">em</span> <span class="mi">0</span> <span class="mi">0</span> <span class="err">#</span><span class="mi">2</span><span class="n">C2C2C</span><span class="p">;</span>
+</span><span class='line'>  <span class="nl">margin:</span> <span class="mi">0</span> <span class="k">auto</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">margin</span><span class="o">-</span><span class="nl">bottom:</span> <span class="mi">1</span><span class="n">em</span><span class="p">;</span>
+</span><span class='line'>  <span class="nl">height:</span> <span class="mf">2.5</span><span class="n">em</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">margin</span><span class="o">-</span><span class="nl">top:</span> <span class="mf">1.25</span><span class="n">em</span><span class="p">;</span>
+</span><span class='line'>  <span class="nl">position:</span> <span class="n">relative</span><span class="p">;</span>
+</span><span class='line'>  <span class="nl">width:</span> <span class="mf">1.5</span><span class="n">em</span><span class="p">;</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="nl">transition:</span> <span class="n">all</span> <span class="mi">1000</span><span class="n">ms</span> <span class="n">linear</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="nl">transition:</span> <span class="n">all</span> <span class="mi">1000</span><span class="n">ms</span> <span class="n">linear</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">o</span><span class="o">-</span><span class="nl">transition:</span> <span class="n">all</span> <span class="mi">1000</span><span class="n">ms</span> <span class="n">linear</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="nl">transition:</span> <span class="n">all</span> <span class="mi">1000</span><span class="n">ms</span> <span class="n">linear</span><span class="p">;</span>
+</span><span class='line'>  <span class="nl">transition:</span> <span class="n">all</span> <span class="mi">1000</span><span class="n">ms</span> <span class="n">linear</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">.</span><span class="nl">mug_animate:</span><span class="n">after</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nl">border:</span> <span class="mf">.25</span><span class="n">em</span> <span class="n">solid</span> <span class="err">#</span><span class="mi">2</span><span class="n">C2C2C</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">border</span><span class="o">-</span><span class="nl">right:</span> <span class="n">none</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">border</span><span class="o">-</span><span class="nl">radius:</span> <span class="mf">.75</span><span class="n">em</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mf">.75</span><span class="n">em</span><span class="p">;</span>
+</span><span class='line'>  <span class="nl">content:</span> <span class="err">&#39;&#39;</span><span class="p">;</span>
+</span><span class='line'>  <span class="nl">height:</span> <span class="mf">1.5</span><span class="n">em</span><span class="p">;</span>
+</span><span class='line'>  <span class="nl">left:</span> <span class="o">-</span><span class="mi">1</span><span class="n">em</span><span class="p">;</span>
+</span><span class='line'>  <span class="nl">position:</span> <span class="n">absolute</span><span class="p">;</span>
+</span><span class='line'>  <span class="nl">top:</span> <span class="mf">.25</span><span class="n">em</span><span class="p">;</span>
+</span><span class='line'>  <span class="nl">width:</span> <span class="mf">.75</span><span class="n">em</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">.</span><span class="nl">mug_animate:</span><span class="n">before</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">border</span><span class="o">-</span><span class="nl">radius:</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mf">0.2</span><span class="n">em</span> <span class="mf">0.2</span><span class="n">em</span><span class="p">;</span>
+</span><span class='line'>  <span class="nl">top:</span> <span class="o">-</span><span class="mf">0.5</span><span class="n">em</span><span class="p">;</span>
+</span><span class='line'>  <span class="nl">left:</span> <span class="o">-</span><span class="mf">0.25</span><span class="n">em</span><span class="p">;</span>
+</span><span class='line'>  <span class="nl">position:</span> <span class="n">absolute</span><span class="p">;</span>
+</span><span class='line'>  <span class="nl">border:</span> <span class="mf">0.25</span><span class="n">em</span> <span class="n">solid</span> <span class="err">#</span><span class="mi">2</span><span class="n">C2C2C</span><span class="p">;</span>
+</span><span class='line'>  <span class="nl">height:</span> <span class="mf">2.5</span><span class="n">em</span><span class="p">;</span>
+</span><span class='line'>  <span class="nl">width:</span> <span class="mf">1.5</span><span class="n">em</span><span class="p">;</span>
+</span><span class='line'>  <span class="nl">content:</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span><span class="o">&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">.</span><span class="nl">mug_animate:</span><span class="n">hover</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="n">box</span><span class="o">-</span><span class="nl">shadow:</span> <span class="n">inset</span> <span class="mi">0</span> <span class="mi">0</span><span class="n">em</span> <span class="mi">0</span> <span class="mi">0</span> <span class="err">#</span><span class="mi">2</span><span class="n">C2C2C</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">box</span><span class="o">-</span><span class="nl">shadow:</span> <span class="n">inset</span> <span class="mi">0</span> <span class="mi">0</span><span class="n">em</span> <span class="mi">0</span> <span class="mi">0</span> <span class="err">#</span><span class="mi">2</span><span class="n">C2C2C</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>You can also create a variety of image filters, which is explained <a href="http://thecodeplayer.com/walkthrough/simple-hover-effects-with-css3-filters">here</a>. You can check it out and start editing all your photos directly using CSS!</p>
 ]]></content>
   </entry>
   
