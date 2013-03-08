@@ -4,7 +4,7 @@
   <title><![CDATA[The Science of Operations]]></title>
   <link href="http://ACrystalC.github.com/atom.xml" rel="self"/>
   <link href="http://ACrystalC.github.com/"/>
-  <updated>2013-02-25T09:23:54-05:00</updated>
+  <updated>2013-03-07T22:18:49-05:00</updated>
   <id>http://ACrystalC.github.com/</id>
   <author>
     <name><![CDATA[Crystal Chang]]></name>
@@ -12,6 +12,68 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Awesome CSS]]></title>
+    <link href="http://ACrystalC.github.com/blog/2013/03/07/image-filters-using-css/"/>
+    <updated>2013-03-07T21:16:00-05:00</updated>
+    <id>http://ACrystalC.github.com/blog/2013/03/07/image-filters-using-css</id>
+    <content type="html"><![CDATA[<p>A quick post about some very cool CSS tricks you can find online. CSS Totoro welcomes you.
+<link rel="stylesheet" href="stylesheets/totoro.css" type="text/css" /></p>
+
+<div class="wrap">
+
+            <div class="base head"></div>
+            <div class="base body"></div>
+
+            <div class="base bodyfillvert"></div>
+            <div class="base bodyfillhoriz"></div>
+
+            <div class="base forearm left"></div>
+            <div class="base forearm right"></div>
+
+            <div class="base arm rotateleft"></div>
+            <div class="base arm rotateright"></div>
+            <div class="base earstemleft"></div>
+            <div class="base earstemright"></div>
+
+            <div class="ear-left"></div>
+            <div class="ear-right"></div>
+
+            <div class="eye eyeleft"></div>
+            <div class="eye eyeright"></div>
+            <div class="nose"></div>
+            <div class="bellybacker"></div>
+
+            <div class="pupil pupilleft"></div>
+            <div class="pupil pupilright"></div>
+            <div class="marking mark1"></div>
+            <div class="marking mark2"></div>
+            <div class="marking mark3"></div>
+
+            <div class="marking mark4"></div>
+            <div class="marking mark5"></div>
+            <div class="marking mark6"></div>
+            <div class="marking mark7"></div>
+
+            <div class="trim flatfeet"></div>
+            <div class="trim splitfeet"></div>
+
+            <div class="katakana">
+                <div class="to char1 stroke1"></div>
+                <div class="to char1 stroke2"></div>
+                <div class="to char2 stroke1"></div>
+                <div class="to char2 stroke2"></div>
+                <div class="ro"></div><div class="rocut"></div>
+            </div>
+
+        </div>
+
+
+<p>Pure CSS Totoro by <a href="http://twitter.com/jacksaidwhat">@jacksaidwhat</a></p>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Reasons to try the 'Harsh' Compass extension]]></title>
