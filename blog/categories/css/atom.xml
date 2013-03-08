@@ -4,7 +4,7 @@
   <title><![CDATA[Category: CSS | The Science of Operations]]></title>
   <link href="http://ACrystalC.github.com/blog/categories/css/atom.xml" rel="self"/>
   <link href="http://ACrystalC.github.com/"/>
-  <updated>2013-03-07T22:18:49-05:00</updated>
+  <updated>2013-03-07T22:42:07-05:00</updated>
   <id>http://ACrystalC.github.com/</id>
   <author>
     <name><![CDATA[Crystal Chang]]></name>
@@ -18,7 +18,7 @@
     <link href="http://ACrystalC.github.com/blog/2013/03/07/image-filters-using-css/"/>
     <updated>2013-03-07T21:16:00-05:00</updated>
     <id>http://ACrystalC.github.com/blog/2013/03/07/image-filters-using-css</id>
-    <content type="html"><![CDATA[<p>A quick post about some very cool CSS tricks you can find online. CSS Totoro welcomes you.
+    <content type="html"><![CDATA[<p>A quick post about some very cool CSS you can find online because I was too busy helping build <a href="http://janeslunch.com">Jane's Lunch</a> to write an in-depth post. Sorry! In any case, <a href="http://codepen.io/jacksaidwhat/pen/faJpv">CSS Totoro</a> welcomes you.
 <link rel="stylesheet" href="stylesheets/totoro.css" type="text/css" /></p>
 
 <div class="wrap">
@@ -70,7 +70,17 @@
         </div>
 
 
-<p>Pure CSS Totoro by <a href="http://twitter.com/jacksaidwhat">@jacksaidwhat</a></p>
+<p style="text-align:center">Pure CSS Totoro by <a href="http://twitter.com/jacksaidwhat">@jacksaidwhat</a></p>
+
+
+<p>CSS is awesome and I don't even mean it <a href="http://www.zazzle.com/css_is_awesome_coffee_mug-168716435071981928">ironically</a>. Sure there are flashier languages, but CSS seems like a lot of fun. You get to see immediate changes to whatever you're working on and you can make so many cool things with it!</p>
+
+<p>For instance, check out these <a href="http://one-div.com/">logos</a> made from only one and some CSS. Some highlights include this mug:</p>
+
+<div class="mug"></div>
+
+
+<div class="ghost"></div>
 
 ]]></content>
   </entry>
