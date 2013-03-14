@@ -4,7 +4,7 @@
   <title><![CDATA[The Science of Operations]]></title>
   <link href="http://ACrystalC.github.com/atom.xml" rel="self"/>
   <link href="http://ACrystalC.github.com/"/>
-  <updated>2013-03-07T23:05:00-05:00</updated>
+  <updated>2013-03-14T09:34:52-04:00</updated>
   <id>http://ACrystalC.github.com/</id>
   <author>
     <name><![CDATA[Crystal Chang]]></name>
@@ -12,6 +12,89 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using Action Mailer Part 1: The Basics]]></title>
+    <link href="http://ACrystalC.github.com/blog/2013/03/13/using-actionmailer/"/>
+    <updated>2013-03-13T21:01:00-04:00</updated>
+    <id>http://ACrystalC.github.com/blog/2013/03/13/using-actionmailer</id>
+    <content type="html"><![CDATA[<p>Action Mailer is a wrapper for Action Controller and the Mail gem. It&#8217;s used to send emails from your app. It works very well for automatated emails like welcome emails and confirmation emails.</p>
+
+<p>There is some set up before actually being able to send an email. In the config/environments/appropriateenvironmentfile.rb file you&#8217;ll need to give the correct specifications for the Action Mailer configuration.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">delivery_method</span> <span class="o">=</span> <span class="ss">:smtp</span>
+</span><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">action_mailer</span><span class="o">.</span><span class="n">smtp_settings</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>  <span class="ss">:address</span>              <span class="o">=&gt;</span> <span class="s2">&quot;smtp.gmail.com&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:port</span>                 <span class="o">=&gt;</span> <span class="mi">587</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:domain</span>               <span class="o">=&gt;</span> <span class="s1">&#39;baci.lindsaar.net&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:user_name</span>            <span class="o">=&gt;</span> <span class="s1">&#39;&lt;username&gt;&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:password</span>             <span class="o">=&gt;</span> <span class="s1">&#39;&lt;password&gt;&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:authentication</span>       <span class="o">=&gt;</span> <span class="s1">&#39;plain&#39;</span><span class="p">,</span>
+</span><span class='line'>  <span class="ss">:enable_starttls_auto</span> <span class="o">=&gt;</span> <span class="kp">true</span>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The example above uses smtp as the delivery method, but other options include sendmail, test, and file. The latter two are generally used during development. Test saves an array of emails sent and is useful during functional and unit testing while file causes Action Mailer to write the email to a file in the tmp/mails directory. SMTP (Simple Mail Transfer Protocol) is the protocol for sending email while sendmail is one of the applications that can send mail through SMTP standards as well as other mail transfer protocols. Choosing SMTP means you have to supply an SMTP server (visible above) while with sendmail it is your local machine that is acting as the server.</p>
+
+<p>After configuring Action Mailer you should be able to send an email, but before you do, you&#8217;ll need a mailer. You generate a mailer in the same way you would generate any other rails resource.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='objc'><span class='line'><span class="n">rails</span> <span class="n">generate</span> <span class="n">mailer</span> <span class="n">UserMailer</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The mailer, views, and tests will be generated for you. The information for the email you want to send goes in the mailer. So we can define a confirmation email in our mailer below.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">UserMailer</span> <span class="o">&lt;</span> <span class="ss">ActionMailer</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">default</span> <span class="ss">:from</span> <span class="o">=&gt;</span> <span class="s2">&quot;info@example.com&quot;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">confirmation_email</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@user</span> <span class="o">=</span> <span class="n">user</span>
+</span><span class='line'>    <span class="vi">@url</span>  <span class="o">=</span> <span class="s2">&quot;http://example.com&quot;</span>
+</span><span class='line'>    <span class="n">mail</span><span class="p">(</span><span class="ss">:to</span> <span class="o">=&gt;</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">,</span> <span class="ss">:subject</span> <span class="o">=&gt;</span> <span class="s2">&quot;Thanks for signing up!&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To have something to render in the email, the views need to be set up as well. You should create both an email view in erb/html and text. They will go in app/view/invitation_mailer and the text file should be named invitation_email.text.erb while the html file is named invitation_email.html.erb.</p>
+
+<p>Assuming you already have a Users controller, now it&#8217;s time to tell it when to send the email. Since in this case, we&#8217;re sending an email to confirm their signing up at our site, we want the email sent when the user is created. This occurs when the user is saved during create in the Users controller. In the create method we can tell it to send the email if the user is saved like so:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">create</span>
+</span><span class='line'>    <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:user</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="vi">@user</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'><span class="err">        </span><span class="no">UserMailer</span><span class="o">.</span><span class="n">confirmation_email</span><span class="p">(</span><span class="vi">@user</span><span class="p">)</span><span class="o">.</span><span class="n">deliver</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>At this point you are now able to send an email from your app. There are tons of ways to extend the functionality of Action Mailer though and we&#8217;ll get into that in later posts.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Awesome CSS]]></title>
