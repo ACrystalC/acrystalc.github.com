@@ -108,7 +108,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Look at us creating our own webhooks!</p>
+<p>Look at us using webhooks!</p>
 
 <p>Now that the callback URL was set up we needed to somehow get the user ID and article ID passed from our app to Mailgun, to the email recipient, back to Mailgun, who would then send it back to us. There was no point in having statistics if we couldn&#8217;t tell who they were for. Reading through Mailgun&#8217;s documentation will reveal that there are custom <a href="http://en.wikipedia.org/wiki/MIME">MIME</a> headers that can be used for this purpose. According to the documentation X-Mailgun-Variables can be used to attach custom JSON data to the message. So in the mailer you can manually set the variables in the header.</p>
 
