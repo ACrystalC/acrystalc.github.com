@@ -9,7 +9,7 @@
   <meta name="author" content="Crystal Chang">
 
   
-  <meta name="description" content="Say you want to build a service where people can invite others to a specific group or team or project. Not an entirely uncommon idea. What do you use &hellip;">
+  <meta name="description" content="There are a lot of email services that allow you to send emails and then look at statistics like open and click-through rates. It&#8217;s very easy &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -64,6 +64,96 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/04/02/mailgun-and-your-rails-app/">Mailgun and Your Rails App</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-02T21:50:00-04:00" pubdate data-updated="true">Apr 2<span>nd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>There are a lot of email services that allow you to send emails and then look at statistics like open and click-through rates. It&#8217;s very easy to get these stats for yourself personally. However sometimes you want to give others access to them as well. It&#8217;s not like you can send around your email service password and let everyone check the dashboard whenever they&#8217;re curious. Here&#8217;s one way to make open and click-through rates available directly in your app.</p>
+
+<p>Theoretically you could build all sorts of information tracking into the email itself. 1x1 pixel images that load when an email is opened so you can track email open rates. Custom urls to check click-thru rates. But since there are services that do this for you already, I&#8217;ll be using <a href="http://www.mailgun.com/">Mailgun</a> here. According to Mailgun there are three ways to access the tracking data from your emails.</p>
+
+<ol>
+<li><p>Control Panel: There are summary tracking stats, tables with event details and campaign reports.</p></li>
+<li><p>HTTP API: You can programmatically access event data and tracking stats.</p></li>
+<li><p>Events: Mailgun can perform an HTTP request into your application when an event occurs.</p></li>
+</ol>
+
+
+<p>The third one is of interest since it can send the data you want directly to your app. If you&#8217;re using SMTP already, you won&#8217;t even need to change your configuration much except to put in your Mailgun info. For the app I was working on, we needed to keep track of click-through rates for links that users emailed to other memebers in their group. So to start I somehow had to get Mailgun to perform an HTTP POST request whenever a specific event (link was clicked) occurred. This was actually pretty easy in Mailgun. You just provide them with a callback URL and then set that URL up as a route in your app that hits a specific event.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">match</span> <span class="s1">&#39;/email/mailgun&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;stats#create&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Look at us creating our own webhooks!</p>
+
+<p>Now that the callback URL was set up we needed to somehow get the user ID and article ID passed from our app to Mailgun, to the email recipient, back to Mailgun, who would then send it back to us. There was no point in having statistics if we couldn&#8217;t tell who they were for. Reading through Mailgun&#8217;s documentation will reveal that there are custom <a href="http://en.wikipedia.org/wiki/MIME">MIME</a> headers that can be used for this purpose. According to the documentation X-Mailgun-Variables can be used to attach custom JSON data to the message. So in the mailer you can manually set the variables in the header.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">headers</span><span class="o">[</span><span class="s1">&#39;X-Mailgun-Variables&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="p">{</span><span class="ss">:article_id</span> <span class="o">=&gt;</span> <span class="vi">@article</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="ss">:user_id</span> <span class="o">=&gt;</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">}</span><span class="o">.</span><span class="n">to_json</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now when the event triggers the HTTP POST request to our app we can access the ID of the user the email was sent to as well as the ID of the article they were sent so we can save that data in our database.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">def</span> <span class="nf">create</span>
+</span><span class='line'>    <span class="n">event</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="ss">:event</span><span class="o">]</span>
+</span><span class='line'>    <span class="k">if</span> <span class="n">event</span> <span class="o">==</span> <span class="s1">&#39;opened&#39;</span>
+</span><span class='line'>      <span class="n">stats</span> <span class="o">=</span> <span class="no">Stat</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="ss">:user_id</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span><span class="p">,</span> <span class="ss">:article_id</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:article_id</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'>      <span class="n">stats</span><span class="o">.</span><span class="n">opens</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class='line'>    <span class="k">elsif</span> <span class="n">event</span> <span class="o">==</span> <span class="s1">&#39;clicked&#39;</span>
+</span><span class='line'>      <span class="n">stats</span> <span class="o">=</span> <span class="no">Stat</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="ss">:user_id</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:user_id</span><span class="o">]</span><span class="p">,</span> <span class="ss">:article_id</span> <span class="o">=&gt;</span> <span class="n">params</span><span class="o">[</span><span class="ss">:article_id</span><span class="o">]</span><span class="p">)</span><span class="o">.</span><span class="n">first</span>
+</span><span class='line'>      <span class="n">stats</span><span class="o">.</span><span class="n">clicks</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>    <span class="n">stats</span><span class="o">.</span><span class="n">save</span>
+</span><span class='line'>  <span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Once the data is saved, we&#8217;re able to access it anytime and display it for users who now know exactly who has and hasn&#8217;t clicked the link in the email they were sent.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -778,6 +868,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/04/02/mailgun-and-your-rails-app/">Mailgun and your Rails App</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/03/28/how-to-let-users-invite-friends-to-their-groups/">How to Let Users Invite Friends to Their Groups</a>
       </li>
     
@@ -791,10 +885,6 @@
     
       <li class="post">
         <a href="/blog/2013/02/24/using-the-compass-extension-harsh/">Reasons to try the &#8216;Harsh&#8217; Compass extension</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/02/12/coding-and-the-art-of-self-realization/">Coding and Self-Realization</a>
       </li>
     
   </ul>
