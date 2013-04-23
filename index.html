@@ -7,7 +7,7 @@
 	<meta name="author" content="Crystal Chang">
 
 	
-	<meta name="description" content="There are a lot of email services that allow you to send emails and then look at statistics like open and click-through rates. It&#8217;s very easy &hellip;">
+	<meta name="description" content="Being able to sort a collecion of data is a fundamental part of programming. There are a variety of ways a collection can be sorted and we&#8217;ll &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -74,6 +74,86 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2013/04/22/exploring-sorting-algorithms/">
+		
+			Exploring Sorting Algorithms</a>
+	</h2>
+	<div class="entry-content">
+		<iframe width="560" height="315" src="http://www.youtube.com/embed/ROalU379l3U" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Being able to sort a collecion of data is a fundamental part of programming. There are a variety of ways a collection can be sorted and we&#8217;ll look at a handful of the most common sorting algorithms. Generally they are differentiated by their efficiency, stability (whether the sort preserves the original order of keys with equal values), and space requirements. Ruby&#8217;s native .sort method uses the quicksort algorithm so let&#8217;s start with that one.</p>
+
+<p>Also if you feel dance will help you better understand sorting algorithms I highly recommend checking out the <a href="http://www.youtube.com/user/AlgoRythmics?feature=watch">Algorythmics</a>. I, for one, found them highly educational about sorting and folk dance.</p>
+
+<h3>Quicksort</h3>
+
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/6/6a/Sorting_quicksort_anim.gif" title="Quicksort" alt="" /></p>
+
+<p>Quicksort is a divide and conquer algorithm in that it divides a larger list into sublists. The lists are made around the pivot (the red bar above). The elements greater than the pivot are in one sublist while all lower elements are in the other sublist. This pattern of organizing around a pivot then occurs recursively on the increasingly smaller sublists until they are all sorted. <a href="http://blog.mostof.it/functional-ruby-a-simple-example/">Here</a> is a nice look at implementing quicksort in ruby over a few implementations.</p>
+
+<br>
+
+
+<h3>Merge Sort</h3>
+
+<p>With merge sort you divide the unsorted list of n items into n sublists. Now each sublist will only have one element in it and the sublists get merged back together to produce new sublists that are ordered. They increase in size until they have all been merged back into one ordered list. You can see the process below and read more about it <a href="http://www.personal.kent.edu/~rmuhamma/Algorithms/MyAlgorithms/Sorting/mergeSort.htm">here</a>.</p>
+
+<p><img src="http://www.personal.kent.edu/~rmuhamma/Algorithms/MyAlgorithms/Sorting/Gifs/mergeSort.gif" title="Merge Sort" alt="" /></p>
+
+<br>
+
+
+<h3>Bubble Sort</h3>
+
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/c/c8/Bubble-sort-example-300px.gif" title="Bubble Sort" alt="" /></p>
+
+<p>Bubble sort works better for smaller lists. It gets very time consuming with larger lists. This is because bubble sort goes through the list and compares each adjacent item. If the pair is out of order, it switches them. Once at the end of the list it starts over and iterates over the list again, swapping adjacent items until the list is finally completely sorted.</p>
+
+<br>
+
+
+<h3>Insertion Sort</h3>
+
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/0/0f/Insertion-sort-example-300px.gif" title="Insertion Sort" alt="" /></p>
+
+<p>Insertion sort takes advantage of the existing order of the input, which makes it adaptive. Like bubble sort, insertion sort is more efficient with smaller data sets. It takes the input list and goes over each element one at a time as it creates a growing sorted output list. This repeats until there are no unsorted input elements left, only sorted output elements. This sorting occurs in-place so if the next element is already the greatest one that the sort has reached, it remains in the same spot as seen above. This makes it a stable sorting algorithm as well.</p>
+
+<p><a href="https://github.com/kanwei/algorithms">Ruby Algorithms</a> is a great resource for seeing how these algorithms can be implemented in ruby and also a way to gague when you should use which one. You can use their benchmark suite to see what would be most efficient where. Definitely worth taking a look at.</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-22T16:59:00-04:00" pubdate data-updated="true">Apr 22<span>nd</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/algorithms/'>Algorithms</a>, <a class='category' href='/blog/categories/compsci/'>CompSci</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+
+
+</div>
+	
+</div></article>
 
 
     <article class="post">
@@ -160,6 +240,10 @@
 
 <time datetime="2013-04-02T21:50:00-04:00" pubdate data-updated="true">Apr 2<span>nd</span>, 2013</time></div>
 	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/mailgun/'>Mailgun</a>, <a class='category' href='/blog/categories/rails/'>Rails</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>, <a class='category' href='/blog/categories/webhooks/'>Webhooks</a>
+
 
 </div>
 	
@@ -352,6 +436,10 @@
 <time datetime="2013-03-28T21:38:00-04:00" pubdate data-updated="true">Mar 28<span>th</span>, 2013</time></div>
 	<div class="tags">
 
+
+	<a class='category' href='/blog/categories/rails/'>Rails</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+
+
 </div>
 	
 </div></article>
@@ -362,7 +450,7 @@
 		
 		<a href="/blog/2013/03/13/using-actionmailer/">
 		
-			Using Action Mailer Part 1: The Basics</a>
+			Using Action Mailer: The Basics</a>
 	</h2>
 	<div class="entry-content">
 		<p>Action Mailer is a wrapper for Action Controller and the Mail gem. It&#8217;s used to send emails from your app. It works very well for automatated emails like welcome emails and confirmation emails.</p>
@@ -461,6 +549,10 @@
 
 <time datetime="2013-03-13T21:01:00-04:00" pubdate data-updated="true">Mar 13<span>th</span>, 2013</time></div>
 	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/actionmailer/'>ActionMailer</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>, <a class='category' href='/blog/categories/smtp/'>SMTP</a>
+
 
 </div>
 	
@@ -671,7 +763,7 @@
 			Reasons to Try the &#8216;Harsh&#8217; Compass Extension</a>
 	</h2>
 	<div class="entry-content">
-		<p>CSS3 has made it easier than ever to create tons of really cool and interesting effects, especially with an open-source framework like Compass. <a href="http://www.bookcasey.com/harsh/">Harsh</a> is a Compass extension that creates CSS3 gradients with, that&#8217;s right, harsh color stops. Or subtle ones if that&#8217;s your thing. I&#8217;ve used Harsh to create the backgrounds here. I&#8217;m glad I found it and tried it out. Here are a few reasons why.</p>
+		<p>CSS3 has made it easier than ever to create tons of really cool and interesting effects, especially with an open-source framework like Compass. <a href="http://www.bookcasey.com/harsh/">Harsh</a> is a Compass extension that creates CSS3 gradients with, that&#8217;s right, harsh color stops. Or subtle ones if that&#8217;s your thing. I&#8217;m glad I found it and tried it out. Here are a few reasons why.</p>
 
 <ol>
 <li><p>It&#8217;s easy! Unless you&#8217;re like me and have next to no experience with CSS, but as long as you&#8217;re not, it&#8217;s totally easy! To incorporate it into an octopress blog I added the gem to the gemfile.
@@ -789,6 +881,10 @@
 <time datetime="2013-02-24T19:10:00-05:00" pubdate data-updated="true">Feb 24<span>th</span>, 2013</time></div>
 	<div class="tags">
 
+
+	<a class='category' href='/blog/categories/css/'>CSS</a>, <a class='category' href='/blog/categories/gems/'>Gems</a>, <a class='category' href='/blog/categories/harsh/'>Harsh</a>
+
+
 </div>
 	
 </div></article>
@@ -842,7 +938,7 @@
 			And So It Begins</a>
 	</h2>
 	<div class="entry-content">
-		<h2>What am I doing?</h2>
+		<p>Getting things together and coding up a storm.</p>
 
 		
 		

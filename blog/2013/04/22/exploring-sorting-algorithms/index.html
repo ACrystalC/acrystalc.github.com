@@ -1,0 +1,179 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Exploring Sorting Algorithms - The Science of Operations</title>
+	<meta name="author" content="Crystal Chang">
+
+	
+	<meta name="description" content="Being able to sort a collecion of data is a fundamental part of programming. There are a variety of ways a collection can be sorted and we&#8217;ll &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="The Science of Operations" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	
+</head>
+
+<body>
+	<header id="header" class="inner"><h1><a href="/">The Science of Operations</a></h1>
+<nav id="main-nav"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</nav>
+<nav id="mobile-nav">
+	<div class="alignleft menu">
+		<a class="button">Menu</a>
+		<div class="container"><ul class="main">
+	<li><a href="/">Blog</a></li>
+	<li><a href="/blog/archives">Archives</a></li>
+</ul>
+</div>
+	</div>
+	<div class="alignright search">
+		<a class="button"></a>
+		<div class="container">
+			<form action="http://google.com/search" method="get">
+				<input type="text" name="q" results="0">
+				<input type="hidden" name="q" value="site:ACrystalC.github.com">
+			</form>
+		</div>
+	</div>
+</nav>
+<nav id="sub-nav" class="alignright">
+	<div class="social">
+		
+		
+		
+		
+		<a class="github" href="https://github.com/ACrystalC" title="GitHub">GitHub</a>
+		
+    
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+	<form class="search" action="http://google.com/search" method="get">
+		<input class="alignright" type="text" name="q" results="0">
+		<input type="hidden" name="q" value="site:ACrystalC.github.com">
+	</form>
+</nav>
+
+</header>
+	
+		
+	
+	<div id="content" class="inner"><article class="post">
+	<h2 class="title">Exploring Sorting Algorithms</h2>
+	<div class="entry-content"><iframe width="560" height="315" src="http://www.youtube.com/embed/ROalU379l3U" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Being able to sort a collecion of data is a fundamental part of programming. There are a variety of ways a collection can be sorted and we&#8217;ll look at a handful of the most common sorting algorithms. Generally they are differentiated by their efficiency, stability (whether the sort preserves the original order of keys with equal values), and space requirements. Ruby&#8217;s native .sort method uses the quicksort algorithm so let&#8217;s start with that one.</p>
+
+<p>Also if you feel dance will help you better understand sorting algorithms I highly recommend checking out the <a href="http://www.youtube.com/user/AlgoRythmics?feature=watch">Algorythmics</a>. I, for one, found them highly educational about sorting and folk dance.</p>
+
+<h3>Quicksort</h3>
+
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/6/6a/Sorting_quicksort_anim.gif" title="Quicksort" alt="" /></p>
+
+<p>Quicksort is a divide and conquer algorithm in that it divides a larger list into sublists. The lists are made around the pivot (the red bar above). The elements greater than the pivot are in one sublist while all lower elements are in the other sublist. This pattern of organizing around a pivot then occurs recursively on the increasingly smaller sublists until they are all sorted. <a href="http://blog.mostof.it/functional-ruby-a-simple-example/">Here</a> is a nice look at implementing quicksort in ruby over a few implementations.</p>
+
+<br>
+
+
+<h3>Merge Sort</h3>
+
+<p>With merge sort you divide the unsorted list of n items into n sublists. Now each sublist will only have one element in it and the sublists get merged back together to produce new sublists that are ordered. They increase in size until they have all been merged back into one ordered list. You can see the process below and read more about it <a href="http://www.personal.kent.edu/~rmuhamma/Algorithms/MyAlgorithms/Sorting/mergeSort.htm">here</a>.</p>
+
+<p><img src="http://www.personal.kent.edu/~rmuhamma/Algorithms/MyAlgorithms/Sorting/Gifs/mergeSort.gif" title="Merge Sort" alt="" /></p>
+
+<br>
+
+
+<h3>Bubble Sort</h3>
+
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/c/c8/Bubble-sort-example-300px.gif" title="Bubble Sort" alt="" /></p>
+
+<p>Bubble sort works better for smaller lists. It gets very time consuming with larger lists. This is because bubble sort goes through the list and compares each adjacent item. If the pair is out of order, it switches them. Once at the end of the list it starts over and iterates over the list again, swapping adjacent items until the list is finally completely sorted.</p>
+
+<br>
+
+
+<h3>Insertion Sort</h3>
+
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/0/0f/Insertion-sort-example-300px.gif" title="Insertion Sort" alt="" /></p>
+
+<p>Insertion sort takes advantage of the existing order of the input, which makes it adaptive. Like bubble sort, insertion sort is more efficient with smaller data sets. It takes the input list and goes over each element one at a time as it creates a growing sorted output list. This repeats until there are no unsorted input elements left, only sorted output elements. This sorting occurs in-place so if the next element is already the greatest one that the sort has reached, it remains in the same spot as seen above. This makes it a stable sorting algorithm as well.</p>
+
+<p><a href="https://github.com/kanwei/algorithms">Ruby Algorithms</a> is a great resource for seeing how these algorithms can be implemented in ruby and also a way to gague when you should use which one. You can use their benchmark suite to see what would be most efficient where. Definitely worth taking a look at.</p>
+</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-22T16:59:00-04:00" pubdate data-updated="true">Apr 22<span>nd</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/algorithms/'>Algorithms</a>, <a class='category' href='/blog/categories/compsci/'>CompSci</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+
+
+</div>
+	
+</div></article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+</div>
+	<footer id="footer" class="inner">Copyright &copy; 2013
+
+    Crystal Chang
+
+</footer>
+	<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+</body>
+</html>

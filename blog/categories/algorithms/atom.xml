@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Algorithms | The Science of Operations]]></title>
+  <link href="http://ACrystalC.github.com/blog/categories/algorithms/atom.xml" rel="self"/>
+  <link href="http://ACrystalC.github.com/"/>
+  <updated>2013-04-23T11:47:15-04:00</updated>
+  <id>http://ACrystalC.github.com/</id>
+  <author>
+    <name><![CDATA[Crystal Chang]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Exploring Sorting Algorithms]]></title>
+    <link href="http://ACrystalC.github.com/blog/2013/04/22/exploring-sorting-algorithms/"/>
+    <updated>2013-04-22T16:59:00-04:00</updated>
+    <id>http://ACrystalC.github.com/blog/2013/04/22/exploring-sorting-algorithms</id>
+    <content type="html"><![CDATA[<iframe width="560" height="315" src="http://www.youtube.com/embed/ROalU379l3U" frameborder="0" allowfullscreen></iframe>
+
+
+<p>Being able to sort a collecion of data is a fundamental part of programming. There are a variety of ways a collection can be sorted and we'll look at a handful of the most common sorting algorithms. Generally they are differentiated by their efficiency, stability (whether the sort preserves the original order of keys with equal values), and space requirements. Ruby's native .sort method uses the quicksort algorithm so let's start with that one.</p>
+
+<p>Also if you feel dance will help you better understand sorting algorithms I highly recommend checking out the <a href="http://www.youtube.com/user/AlgoRythmics?feature=watch">Algorythmics</a>. I, for one, found them highly educational about sorting and folk dance.</p>
+
+<h3>Quicksort</h3>
+
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/6/6a/Sorting_quicksort_anim.gif" title="Quicksort" alt="" /></p>
+
+<p>Quicksort is a divide and conquer algorithm in that it divides a larger list into sublists. The lists are made around the pivot (the red bar above). The elements greater than the pivot are in one sublist while all lower elements are in the other sublist. This pattern of organizing around a pivot then occurs recursively on the increasingly smaller sublists until they are all sorted. <a href="http://blog.mostof.it/functional-ruby-a-simple-example/">Here</a> is a nice look at implementing quicksort in ruby over a few implementations.</p>
+
+<br>
+
+
+<h3>Merge Sort</h3>
+
+<p>With merge sort you divide the unsorted list of n items into n sublists. Now each sublist will only have one element in it and the sublists get merged back together to produce new sublists that are ordered. They increase in size until they have all been merged back into one ordered list. You can see the process below and read more about it <a href="http://www.personal.kent.edu/~rmuhamma/Algorithms/MyAlgorithms/Sorting/mergeSort.htm">here</a>.</p>
+
+<p><img src="http://www.personal.kent.edu/~rmuhamma/Algorithms/MyAlgorithms/Sorting/Gifs/mergeSort.gif" title="Merge Sort" alt="" /></p>
+
+<br>
+
+
+<h3>Bubble Sort</h3>
+
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/c/c8/Bubble-sort-example-300px.gif" title="Bubble Sort" alt="" /></p>
+
+<p>Bubble sort works better for smaller lists. It gets very time consuming with larger lists. This is because bubble sort goes through the list and compares each adjacent item. If the pair is out of order, it switches them. Once at the end of the list it starts over and iterates over the list again, swapping adjacent items until the list is finally completely sorted.</p>
+
+<br>
+
+
+<h3>Insertion Sort</h3>
+
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/0/0f/Insertion-sort-example-300px.gif" title="Insertion Sort" alt="" /></p>
+
+<p>Insertion sort takes advantage of the existing order of the input, which makes it adaptive. Like bubble sort, insertion sort is more efficient with smaller data sets. It takes the input list and goes over each element one at a time as it creates a growing sorted output list. This repeats until there are no unsorted input elements left, only sorted output elements. This sorting occurs in-place so if the next element is already the greatest one that the sort has reached, it remains in the same spot as seen above. This makes it a stable sorting algorithm as well.</p>
+
+<p><a href="https://github.com/kanwei/algorithms">Ruby Algorithms</a> is a great resource for seeing how these algorithms can be implemented in ruby and also a way to gague when you should use which one. You can use their benchmark suite to see what would be most efficient where. Definitely worth taking a look at.</p>
+]]></content>
+  </entry>
+  
+</feed>

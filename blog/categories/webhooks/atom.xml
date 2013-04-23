@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Webhooks | The Science of Operations]]></title>
+  <link href="http://ACrystalC.github.com/blog/categories/webhooks/atom.xml" rel="self"/>
+  <link href="http://ACrystalC.github.com/"/>
+  <updated>2013-04-23T11:47:15-04:00</updated>
+  <id>http://ACrystalC.github.com/</id>
+  <author>
+    <name><![CDATA[Crystal Chang]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Mailgun and your Rails App]]></title>
+    <link href="http://ACrystalC.github.com/blog/2013/04/02/mailgun-and-your-rails-app/"/>
+    <updated>2013-04-02T21:50:00-04:00</updated>
+    <id>http://ACrystalC.github.com/blog/2013/04/02/mailgun-and-your-rails-app</id>
+    <content type="html"><![CDATA[<p>There are a lot of email services that allow you to send emails and then look at statistics like open and click-through rates. It's very easy to get these stats for yourself personally. However sometimes you want to give others access to them as well. It's not like you can send around your email service password and let everyone check the dashboard whenever they're curious. Here's one way to make open and click-through rates available directly in your app.</p>
+
+<p>Theoretically you could build all sorts of information tracking into the email itself. 1x1 pixel images that load when an email is opened so you can track email open rates. Custom urls to check click-thru rates. But since there are services that do this for you already, I'll be using <a href="http://www.mailgun.com/">Mailgun</a> here. According to Mailgun there are three ways to access the tracking data from your emails.</p>
+
+<ol>
+<li><p>Control Panel: There are summary tracking stats, tables with event details and campaign reports.</p></li>
+<li><p>HTTP API: You can programmatically access event data and tracking stats.</p></li>
+<li><p>Events: Mailgun can perform an HTTP request into your application when an event occurs.</p></li>
+</ol>
+
+
+<p>The third one is of interest since it can send the data you want directly to your app. If you're using SMTP already, you won't even need to change your configuration much except to put in your Mailgun info. For the app I was working on, we needed to keep track of click-through rates for links that users emailed to other memebers in their group. So to start I somehow had to get Mailgun to perform an HTTP POST request whenever a specific event (link was clicked) occurred. This was actually pretty easy in Mailgun. You just provide them with a callback URL and then set that URL up as a route in your app that hits a specific event.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">match</span> <span class="s1">&#39;/email/mailgun&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;stats#create&#39;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Look at us using webhooks!</p>
+
+<p>Now that the callback URL was set up we needed to somehow get the user ID and article ID passed from our app to Mailgun, to the email recipient, back to Mailgun, who would then send it back to us. There was no point in having statistics if we couldn't tell who they were for. Reading through Mailgun's documentation will reveal that there are custom <a href="http://en.wikipedia.org/wiki/MIME">MIME</a> headers that can be used for this purpose. According to the documentation X-Mailgun-Variables can be used to attach custom JSON data to the message. So in the mailer you can manually set the variables in the header.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">headers</span><span class="o">[</span><span class="s1">&#39;X-Mailgun-Variables&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="p">{</span><span class="ss">:article_id</span> <span class="o">=&gt;</span> <span class="vi">@article</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="ss">:user_id</span> <span class="o">=&gt;</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">}</span><span class="o">.</span><span class="n">to_json</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Now when the event triggers the HTTP POST request to our app we can access the ID of the user the email was sent to as well as the ID of the article they were sent so we can save that data in our database.</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'>  <span class="k">def</span> <span class="nf">create</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;event = params[:event]</span>
+</span><span class='line'><span class="sr">if event == &#39;opened&#39;</span>
+</span><span class='line'><span class="sr">  stats = Stat.where(:user_id =&amp;gt; params[:user_id], :article_id =&amp;gt; params[:article_id]).first</span>
+</span><span class='line'><span class="sr">  stats.opens = 1</span>
+</span><span class='line'><span class="sr">elsif event == &#39;clicked&#39;</span>
+</span><span class='line'><span class="sr">  stats = Stat.where(:user_id =&amp;gt; params[:user_id], :article_id =&amp;gt; params[:article_id]).first</span>
+</span><span class='line'><span class="sr">  stats.clicks = 1 </span>
+</span><span class='line'><span class="sr">end</span>
+</span><span class='line'><span class="sr">stats.save </span>
+</span><span class='line'><span class="sr">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;</span><span class="sr">/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;p&gt;  end</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Once the data is saved, we're able to access it anytime and display it for users who now know exactly who has and hasn't clicked the link in the email they were sent.</p>
+]]></content>
+  </entry>
+  
+</feed>
