@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ajax | The Science of Operations]]></title>
   <link href="http://ACrystalC.github.com/blog/categories/ajax/atom.xml" rel="self"/>
   <link href="http://ACrystalC.github.com/"/>
-  <updated>2013-05-28T15:00:36-04:00</updated>
+  <updated>2013-05-28T15:01:50-04:00</updated>
   <id>http://ACrystalC.github.com/</id>
   <author>
     <name><![CDATA[Crystal Chang]]></name>
@@ -85,6 +85,8 @@
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>The first line of code is a change event for when an option is selected from the drop-down menu. The second line defines the variable that is used in the next line to pass the option name to params. You'll see the .getJSON method I mentioned earlier, which we use here to call the update_chosen_response method. Then just specify the form fields that will be affected and use .val to pass along the returned data that will populate them.</p>
+
+<p>Hopefully this was helpful!</p>
 ]]></content>
   </entry>
   
