@@ -7,7 +7,7 @@
 	<meta name="author" content="Crystal Chang">
 
 	
-	<meta name="description" content="Being able to sort a collecion of data is a fundamental part of programming. There are a variety of ways a collection can be sorted and we&#8217;ll &hellip;">
+	<meta name="description" content="Recently I was working on a project that was eventually supposed to culminate in creating a form where the drop-down option selected would result in &hellip;">
 	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -74,6 +74,103 @@
 		
 	
 	<div id="content" class="inner">
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2013/05/28/dynamically-populating-a-form-from-drop-down-selection/">
+		
+			Dynamically Populating a Form From Drop-down Selection</a>
+	</h2>
+	<div class="entry-content">
+		<p>Recently I was working on a project that was eventually supposed to culminate in creating a form where the drop-down option selected would result in the form fields being populated with previously saved data. I thought I&#8217;d try my hand at building out that action. I&#8217;ll go into the details and code of how it works below.</p>
+
+<p>Here&#8217;s the form with the options you can select.</p>
+
+<p><img src="/images/posts/selection.png" alt="Drop-down Menu" /></p>
+
+<p>When you&#8217;ve made your selection some of the form fields will populate with text as you can see here.</p>
+
+<p><img src="/images/posts/selected.png" alt="" /></p>
+
+<p>In order to create this ability, I wrote a method in the controller that responds with the data I need in JSON format. This is useful because jQuery has an ajax function called .getJSON, which will be used later. So the method I wrote looked something like this.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">def</span> <span class="nf">update_chosen_response</span>
+</span><span class='line'>  <span class="vi">@response</span> <span class="o">=</span> <span class="no">Response</span><span class="o">.</span><span class="n">find_by_name</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:name</span><span class="o">]</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+</span><span class='line'>    <span class="nb">format</span><span class="o">.</span><span class="n">json</span> <span class="p">{</span> <span class="n">render</span> <span class="ss">json</span><span class="p">:</span> <span class="vi">@response</span><span class="o">.</span><span class="n">to_json</span> <span class="p">}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The route needs to be changed so the we can query the database by name and not just id. We do that by adding the :name to the route so we&#8217;ll have that information in the params for use later.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">match</span> <span class="s1">&#39;update_response/:name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;response#update_chosen_response&#39;</span><span class="p">,</span> <span class="ss">:as</span> <span class="o">=&gt;</span> <span class="s1">&#39;update_chosen_response&#39;</span><span class="p">,</span> <span class="ss">:via</span> <span class="o">=&gt;</span> <span class="ss">:get</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we have a method that pulls the data we need (specifically the response subject and message) and outputs it in JSON. We also have a route that allows us to pass the name of the response selected through params so we can pull the correct data. Now we can move onto the jQuery.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#response_category&#39;</span><span class="p">).</span><span class="nx">change</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">option</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#response_category&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+</span><span class='line'>  <span class="nx">$</span><span class="p">.</span><span class="nx">getJSON</span><span class="p">(</span><span class="s1">&#39;/manage/update_response/&#39;</span> <span class="o">+</span> <span class="nx">option</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#response_subject&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">subject</span><span class="p">);</span>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#response_body&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">message</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">})</span>
+</span><span class='line'>  <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The first line of code is a change event for when an option is selected from the drop-down menu. The second line defines the variable that is used in the next line to pass the option name to params. You&#8217;ll see the .getJSON method I mentioned earlier, which we use here to call the update_chosen_response method. Then just specify the form fields that will be affected and use .val to pass along the returned data that will populate them.</p>
+
+		
+		
+	</div>
+
+
+<div class="meta">
+	<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-28T13:36:00-04:00" pubdate data-updated="true">May 28<span>th</span>, 2013</time></div>
+	<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ajax/'>Ajax</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>, <a class='category' href='/blog/categories/jquery/'>jQuery</a>
+
+
+</div>
+	
+</div></article>
 
 
     <article class="post">
