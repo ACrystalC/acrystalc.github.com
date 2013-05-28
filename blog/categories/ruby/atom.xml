@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | The Science of Operations]]></title>
   <link href="http://ACrystalC.github.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://ACrystalC.github.com/"/>
-  <updated>2013-05-28T15:01:50-04:00</updated>
+  <updated>2013-05-28T15:07:11-04:00</updated>
   <id>http://ACrystalC.github.com/</id>
   <author>
     <name><![CDATA[Crystal Chang]]></name>
@@ -26,7 +26,7 @@
 
 <p>When you've made your selection some of the form fields will populate with text as you can see here.</p>
 
-<p><img src="/images/selected.png" alt="" /></p>
+<p><img src="/images/harsh_salmon.png" alt="Harsh Salmon" /></p>
 
 <p>In order to create this ability, I wrote a method in the controller that responds with the data I need in JSON format. This is useful because jQuery has an ajax function called .getJSON, which will be used later. So the method I wrote looked something like this.</p>
 
